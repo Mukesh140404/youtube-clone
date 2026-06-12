@@ -27,6 +27,9 @@ router.route("/register").post(
 );
 
 router.route("/login").post(loginUser);
+router.route("/check").post((req, res)=>{
+  return res.json({"health":"ok"})
+})
 router.route("/logout").post(verifyJwt, logoutUser);
 
 router.route("/refresh-token").post(refreshAccessToken);
