@@ -1,5 +1,5 @@
 import React, { useState, useRef, type ChangeEvent } from "react";
-import { X, Upload, Film, Image as ImageIcon, Loader2 } from "lucide-react";
+import { X, Upload, Image as ImageIcon, Loader2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addNewVideoApi } from "@/client/video.api"; // Maan ke chal raha hoon ye path hai
 

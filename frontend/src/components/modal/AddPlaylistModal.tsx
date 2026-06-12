@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, ListPlus, Loader2, Upload } from "lucide-react";
+import { X, Loader2, Upload } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPlaylistApi } from "@/client/playlist.api";
 

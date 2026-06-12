@@ -80,7 +80,7 @@ const CommentsSection = ({ video }: Props) => {
   const queryClient = useQueryClient();
   const user = useUserStore((state)=>state.user)
 
-  const { data, isLoading, isError, error } = useQuery<GetCommentsResponse>({
+  const { data, isLoading } = useQuery<GetCommentsResponse>({
     queryKey: ["userComment", video._id],
     queryFn: () => getAllCommentApi(video._id),
   });
@@ -88,7 +88,7 @@ const CommentsSection = ({ video }: Props) => {
   const addCommentMutation = useMutation({
     mutationFn: addCommentApi,
 
-    onSuccess: (comment) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userComment", video._id] });
     },
 

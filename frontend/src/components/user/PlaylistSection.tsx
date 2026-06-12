@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ListPlus, PlaySquare, Loader2 } from "lucide-react";
 import { getAllPlaylistOfUserApi } from "@/client/playlist.api";

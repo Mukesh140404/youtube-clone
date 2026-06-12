@@ -8,7 +8,7 @@ const SubscribesList = () => {
     //     queryKey:
     // })
     const user = useUserStore((state) => state.user)
-    const { data: subscriptions, isLoading, isError } = useQuery({
+    const { data: subscriptions} = useQuery({
         queryKey: ["userSubscribers"],
         queryFn: () => allSubscribedChannelOfUser(user?._id),
     });
@@ -24,7 +24,7 @@ const SubscribesList = () => {
             {
                 subscriptions && subscriptions.count > 0 ? (
                     <div>
-                        {subscriptions.channels.map((sub: any, index: number) => {
+                        {subscriptions.channels.map((sub: any) => {
                             
                             return (
                                 <Link

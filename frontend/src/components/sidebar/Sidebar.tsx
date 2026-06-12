@@ -4,10 +4,10 @@ import { AiFillHome, AiFillLike } from "react-icons/ai";
 import {
   MdOutlineBolt,
   MdHistory,
-  MdOutlineVideoLibrary,
-  MdWatchLater,
+  // MdOutlineVideoLibrary,
+  // MdWatchLater,
   MdOutlinePlaylistPlay,
-  MdOutlineFileDownload,
+  // MdOutlineFileDownload,
 } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import SubscribesList from "./SubscribesList";
