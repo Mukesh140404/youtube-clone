@@ -36,10 +36,5 @@ app.use("/api/v1/playlists",playlistRouter)
 app.use("/api/v1/views",viewRouter)
 app.use("/api/v1/subscriptions",subscriptionRouter)
 
-app.get("/getmssg",(req,res)=>{
-    res.send({
-        "mssg":"hello"
-    })   
-})
 
 export {app}
