@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Global resets for dark mode transitions */
+body {
+    @apply transition-colors duration-200;
+}
