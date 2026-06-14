@@ -10,14 +10,14 @@ import {
     getPlaylistById,
 
 } from "../controllers/playlist.controller.js"
-import { upload } from "../middlewares/multer.middleware.js"
+import { uploadImage } from "../middlewares/multer.middleware.js"
 
 const router = Router()
 router.use(verifyJwt)
 
-router.route("/add-playlist").post(upload.single("thumbnail"), createPlaylist)
+router.route("/add-playlist").post(uploadImage.single("thumbnail"), createPlaylist)
 router.route("/add-videos/:playlistId").post(addVideosInPlaylist)
-router.route("/update/:playlistId").patch(upload.single("thumbnail"), updatePlaylist)
+router.route("/update/:playlistId").patch(uploadImage.single("thumbnail"), updatePlaylist)
 router.route("/remove-video/:playlistId/:videoId").patch(removeVideoFromPlaylist)
 router.route("/getAllPlaylist/:userId").get(getAllPlaylistOfUser)
 router.route("/delete/:playlistId").delete(deletePlaylist)

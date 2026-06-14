@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {upload} from "../middlewares/multer.middleware.js"
+import {checkThumbnailSize, uploadVideo} from "../middlewares/multer.middleware.js"
 import {verifyJwt} from '../middlewares/auth.middleware.js';
 import {
     getAllVideos,
@@ -17,9 +17,10 @@ router.use(verifyJwt)
 router.get("/all-videos",getAllVideos)
 router.route("/v/:userId").get(getUserAllVideos)
 router.route("/add-video").post(
-    upload.fields([
+    uploadVideo.fields([
         { name : "videoFile", maxCount : 1},
         { name : "thumbnail", maxCount : 1}])
+    ,checkThumbnailSize
     ,publishVideo)
 
 router.route("/update/:videoId").patch(updateVideo)
