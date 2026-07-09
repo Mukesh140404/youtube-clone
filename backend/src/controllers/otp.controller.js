@@ -1,8 +1,8 @@
-import { ApiError, ApiResponse, asyncHandler } from "../utils";
-import Otp from "../models/otp.model";
+import { ApiError, ApiResponse, asyncHandler } from "../utils/index.js";
+import Otp from "../models/otp.modals.js";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
-import { sendOTP } from "../lib/nodemailer";
+import { sendOTP } from "../lib/nodemailer.js";
 
 const sendOtp = asyncHandler(async (req, res) => {
 
