@@ -22,4 +22,4 @@ const otpSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-export const Otp =mongoose.model("Otp", otpSchema)
+export const Otp = mongoose.model("Otp", otpSchema)

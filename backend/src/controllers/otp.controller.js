@@ -1,5 +1,5 @@
 import { ApiError, ApiResponse, asyncHandler } from "../utils/index.js";
-import Otp from "../models/otp.modals.js";
+import {Otp} from "../models/otp.modals.js";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 import { sendOTP } from "../lib/nodemailer.js";
