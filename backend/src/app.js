@@ -24,6 +24,7 @@ import likeRouter from "./routes/like.routes.js"
 import playlistRouter from "./routes/playlist.routes.js"
 import viewRouter from "./routes/view.routes.js"
 import subscriptionRouter from "./routes/subscription.routes.js"
+import otpRouter from "./routes/otp.routes.js"
 
 
 
@@ -36,6 +37,7 @@ app.use("/api/v1/likes",likeRouter)
 app.use("/api/v1/playlists",playlistRouter)
 app.use("/api/v1/views",viewRouter)
 app.use("/api/v1/subscriptions",subscriptionRouter)
+app.use("/api/v1/otps",otpRouter)
 
 app.get("/",(req,res)=>{
     res.send("Welcome to the VideoTube API")
