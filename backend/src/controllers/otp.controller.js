@@ -1,22 +1,20 @@
 import { ApiError, ApiResponse, asyncHandler } from "../utils/index.js";
 import {Otp} from "../models/otp.modals.js";
+import {User} from "../models/user.models.js";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 import { sendOTP } from "../lib/nodemailer.js";
 
 const sendOtp = asyncHandler(async (req, res) => {
-
     const { email } = req.body;
     if (!email) throw new ApiError(400, "Email is required");
-
     const user = await User.findOne({ email });
     if (!user) throw new ApiError(404, "User does not exist with this email");
-
     const otp = await sendOTP(email);
     //hash the otp
     const otpHash = await bcrypt.hash(otp, 10);
     const expireAt = new Date(Date.now() + 2 * 60 * 1000); //20 minutes from now
-
+    
     const otpDoc = await Otp.create({
         email,
         expireAt,
@@ -33,6 +31,7 @@ const sendOtp = asyncHandler(async (req, res) => {
 })
 
 const verifyOtp = asyncHandler(async (req, res) => {
+    
     const { email, otp } = req.body;
     if (!email || !otp) throw new ApiError(400, "Email and OTP are required");
 
