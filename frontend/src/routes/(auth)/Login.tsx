@@ -24,8 +24,6 @@ function Login() {
       password,
     };
 
-    // console.log("Sending Form Data:", formData);
-
     try {
       await loginApi(formData);
       // Navigate to home page on successful login
@@ -34,7 +32,7 @@ function Login() {
       console.error("Login failed:", err);
       setError(
         err?.response?.data?.message ||
-          "Login failed. Please check your credentials.",
+        "Login failed. Please check your credentials."
       );
     } finally {
       setLoading(false);
@@ -42,84 +40,107 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white max-w-md w-full rounded-2xl shadow-lg p-8 border border-gray-100">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-gray-500">Please sign in to your account</p>
-        </div>
-
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm text-center">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white text-gray-900"
-              placeholder="hc@h.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white text-gray-900"
-              placeholder="12345678"
-            />
+    <div className="min-h-screen h-full relative bg-gray-50 flex flex-col md:flex-row">
+      <div className="w-full h-full min-h-screen">
+        <img
+          src="/login-banner.jpeg"
+          alt="Login Banner"
+          className="h-full min-h-screen w-full object-cover"
+        />
+      </div>
+      <div
+        className="
+    w-9/10 md:w-3/7
+    h-auto md:h-screen
+    absolute rounded-xl md:rounded-none
+    left-1/2 -translate-x-1/2
+    md:left-auto md:right-0 md:translate-x-0
+    top-1/2 -translate-y-1/2
+    md:top-0 md:translate-y-0
+    flex items-center justify-center
+    p-4
+    bg-white/15
+  "
+      >
+        <div className="w-full max-w-lg">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-black mb-2">
+              Welcome Back
+            </h1>
+            <p className="text-white/70">Please sign in to your account</p>
           </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center text-gray-600 cursor-pointer">
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm text-center">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-black mb-2">
+                Email Address
+              </label>
               <input
-                type="checkbox"
-                className="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-black focus:border-black/30 focus:ring-2 focus:ring-black/80 outline-none transition-all bg-transparent text-black"
+                placeholder="hc@h.com"
               />
-              Remember me
-            </label>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-black mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-black focus:border-black/30 focus:ring-2 focus:ring-black/80 outline-none transition-all bg-transparent text-black"
+                placeholder="12345678"
+              />
+            </div>
+
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center text-black cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="mr-2 rounded  border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                Remember me
+              </label>
+              <button
+                onClick={() => navigate({ to: "/forget-password" })}
+                type="button"
+                className="text--black font-medium transition-colors"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
             <button
-              type="button"
-              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              type="submit"
+              disabled={loading}
+              className="w-full bg-black text-white font-semibold py-3 rounded-xl hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Forgot Password?
+              {loading ? "Signing in..." : "Sign In"}
             </button>
-          </div>
+          </form>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-black text-white font-semibold py-3 rounded-xl hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {loading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
-
-        <p className="mt-8 text-center text-gray-600 text-sm">
-          Don't have an account?{" "}
-          <Link
-            to="/Signup"
-            className="text-blue-600 hover:text-blue-700 font-semibold transition-colors"
-          >
-            Sign up
-          </Link>
-        </p>
+          <p className="mt-8 text-center text-black text-sm">
+            Don't have an account?{" "}
+            <Link
+              to="/Signup"
+              className="text-rose-600 hover:text-rose-700 font-semibold transition-colors"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

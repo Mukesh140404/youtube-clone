@@ -17,6 +17,7 @@ import { Route as protectedWatchRouteImport } from './routes/(protected)/watch'
 import { Route as protectedTweetsRouteImport } from './routes/(protected)/tweets'
 import { Route as protectedSubscriptionsRouteImport } from './routes/(protected)/subscriptions'
 import { Route as protectedUserIdRouteImport } from './routes/(protected)/$userId'
+import { Route as authForgetPasswordRouteImport } from './routes/(auth)/forget-password'
 import { Route as authSignupRouteImport } from './routes/(auth)/Signup'
 import { Route as authLoginRouteImport } from './routes/(auth)/Login'
 import { Route as protectedPlaylistPlaylistIdRouteImport } from './routes/(protected)/playlist.$playlistId'
@@ -59,6 +60,11 @@ const protectedUserIdRoute = protectedUserIdRouteImport.update({
   path: '/$userId',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const authForgetPasswordRoute = authForgetPasswordRouteImport.update({
+  id: '/forget-password',
+  path: '/forget-password',
+  getParentRoute: () => authRouteRoute,
+} as any)
 const authSignupRoute = authSignupRouteImport.update({
   id: '/Signup',
   path: '/Signup',
@@ -79,6 +85,7 @@ const protectedPlaylistPlaylistIdRoute =
 export interface FileRoutesByFullPath {
   '/Login': typeof authLoginRoute
   '/Signup': typeof authSignupRoute
+  '/forget-password': typeof authForgetPasswordRoute
   '/$userId': typeof protectedUserIdRoute
   '/subscriptions': typeof protectedSubscriptionsRoute
   '/tweets': typeof protectedTweetsRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/Login': typeof authLoginRoute
   '/Signup': typeof authSignupRoute
+  '/forget-password': typeof authForgetPasswordRoute
   '/$userId': typeof protectedUserIdRoute
   '/subscriptions': typeof protectedSubscriptionsRoute
   '/tweets': typeof protectedTweetsRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/(protected)': typeof protectedRouteRouteWithChildren
   '/(auth)/Login': typeof authLoginRoute
   '/(auth)/Signup': typeof authSignupRoute
+  '/(auth)/forget-password': typeof authForgetPasswordRoute
   '/(protected)/$userId': typeof protectedUserIdRoute
   '/(protected)/subscriptions': typeof protectedSubscriptionsRoute
   '/(protected)/tweets': typeof protectedTweetsRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/Login'
     | '/Signup'
+    | '/forget-password'
     | '/$userId'
     | '/subscriptions'
     | '/tweets'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
   to:
     | '/Login'
     | '/Signup'
+    | '/forget-password'
     | '/$userId'
     | '/subscriptions'
     | '/tweets'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/(protected)'
     | '/(auth)/Login'
     | '/(auth)/Signup'
+    | '/(auth)/forget-password'
     | '/(protected)/$userId'
     | '/(protected)/subscriptions'
     | '/(protected)/tweets'
@@ -213,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedUserIdRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(auth)/forget-password': {
+      id: '/(auth)/forget-password'
+      path: '/forget-password'
+      fullPath: '/forget-password'
+      preLoaderRoute: typeof authForgetPasswordRouteImport
+      parentRoute: typeof authRouteRoute
+    }
     '/(auth)/Signup': {
       id: '/(auth)/Signup'
       path: '/Signup'
@@ -240,11 +259,13 @@ declare module '@tanstack/react-router' {
 interface authRouteRouteChildren {
   authLoginRoute: typeof authLoginRoute
   authSignupRoute: typeof authSignupRoute
+  authForgetPasswordRoute: typeof authForgetPasswordRoute
 }
 
 const authRouteRouteChildren: authRouteRouteChildren = {
   authLoginRoute: authLoginRoute,
   authSignupRoute: authSignupRoute,
+  authForgetPasswordRoute: authForgetPasswordRoute,
 }
 
 const authRouteRouteWithChildren = authRouteRoute._addFileChildren(

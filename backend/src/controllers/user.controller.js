@@ -8,6 +8,7 @@ import {
   getPublicId,
 } from "../utils/index.js";
 import jwt from "jsonwebtoken";
+import { Otp } from "../models/otp.modals.js";
 import mongoose from "mongoose";
 
 const genrateTokens = async (userId) => {
@@ -108,20 +109,20 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered successfully"));
 });
 
-const setNewPassword = asyncHandler(async (req, res)=>{
+const setNewPassword = asyncHandler(async (req, res) => {
   const { email, newPassword } = req.body;
-  if(!email || !newPassword) throw new ApiError(400,"Email and new password are required")
-  const otpDoc = await Otp.findOne({email}).sort({createdAt:-1})
-  if(!otpDoc) throw new ApiError(404,"OTP not found for this email")
-  if(!otpDoc.isVerified) throw new ApiError(400,"OTP is not verified yet")
-  
-  const user = await User.findOne({email})
-  if(!user) throw new ApiError(404,"User does not exists with this email")
+  if (!email || !newPassword) throw new ApiError(400, "Email and new password are required")
+  const otpDoc = await Otp.findOne({ email }).sort({ createdAt: -1 })
+  if (!otpDoc) throw new ApiError(404, "OTP not found for this email")
+  if (!otpDoc.isVerified) throw new ApiError(400, "OTP is not verified yet")
+
+  const user = await User.findOne({ email })
+  if (!user) throw new ApiError(404, "User does not exists with this email")
   user.password = newPassword;
-  await user.save({validateBeforeSave:false})
+  await user.save({ validateBeforeSave: false })
   return res
     .status(200)
-    .json(new ApiResponse(200, {}, "Password changed successfully"))
+    .json(new ApiResponse(200, { success: true }, "Password changed successfully"))
 })
 
 const loginUser = asyncHandler(async (req, res) => {
