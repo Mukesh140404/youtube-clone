@@ -41,17 +41,17 @@ function Login() {
 
   return (
     <div className="min-h-screen h-full relative bg-gray-50 flex flex-col md:flex-row">
-      <div className="w-full h-full max-h-screen">
+      <div className="w-full h-screen">
         <img
           src="/login-banner.jpeg"
           alt="Login Banner"
-          className="h-full max-h-screen w-full object-cover"
+          className="h-screen w-full object-cover"
         />
       </div>
       <div
         className="
     w-9/10 md:w-3/7
-     max-h-screen h-full
+     md:h-screen h-auto
     absolute rounded-xl md:rounded-none
     left-1/2 -translate-x-1/2
     md:left-auto md:right-0 md:translate-x-0
