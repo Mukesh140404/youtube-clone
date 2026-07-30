@@ -13,13 +13,13 @@ export interface Owner {
 
 export interface Video {
   _id: string;
-  videoFile: string;
+  videoFile?: string;
   thumbnail: string;
   title: string;
-  description: string;
+  description?: string;
   duration: number;
   views: number;
-  owner: Owner;
+  owner?: Owner;
   createdAt: string;
   updatedAt: string;
   isSubscribed?: boolean;

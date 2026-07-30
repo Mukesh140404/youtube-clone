@@ -4,7 +4,6 @@ import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { z } from 'zod'
-// import { SendOtpApi, VerifyOtpApi, ResetPasswordApi } from '../../client/user.api'
 
 export const Route = createFileRoute('/(auth)/forget-password')({
   component: ForgotPassword,
@@ -52,7 +51,7 @@ function ForgotPassword() {
 
   // ---------- Step 1: Email ----------
 
-const SendOtpMutation = useMutation({
+const {mutate:SendOtpMutation,isPending:isSendOtpPending} = useMutation({
   mutationFn: sendOtpApi,
   onSuccess: () => {
     toast.success('OTP sent successfully. Please check your email.')
@@ -77,10 +76,8 @@ const SendOtpMutation = useMutation({
       return
     }
     setErrors({})
-
-    setLoading(true)
     try {
-      SendOtpMutation.mutate({email})
+      SendOtpMutation({email})
     } catch (err: any) {
       setApiError(err?.response?.data?.message || 'Failed to send OTP. Please try again.')
     } finally {
@@ -90,7 +87,7 @@ const SendOtpMutation = useMutation({
 
   // ---------- Step 2: OTP ----------
 
-  const VerifyOtpMutation = useMutation({
+  const {mutate:VerifyOtpMutation,isPending:isVerifyOtpPending} = useMutation({
     mutationFn: verifyOtpApi,
     onSuccess: () => {
       toast.success('OTP verified successfully.')
@@ -118,7 +115,7 @@ const SendOtpMutation = useMutation({
 
     setLoading(true)
     try {
-      VerifyOtpMutation.mutate({ email, otp })
+      VerifyOtpMutation({ email, otp })
     } catch (err: any) {
       setApiError(err?.response?.data?.message || 'Invalid OTP. Please try again.')
     } finally {
@@ -128,7 +125,7 @@ const SendOtpMutation = useMutation({
 
   // ---------- Step 3: Reset Password ----------
 
-  const resetPasswordMutation = useMutation({
+  const {mutate:resetPasswordMutation,isPending:isResetPasswordPending} = useMutation({
     mutationFn: resetPasswordApi,
     onSuccess: () => {
       toast.success('Password reset successfully. Please log in with your new password.')
@@ -156,7 +153,7 @@ const SendOtpMutation = useMutation({
 
     setLoading(true)
     try {
-      resetPasswordMutation.mutate({ email, newPassword })
+      resetPasswordMutation({ email, newPassword })
     } catch (err: any) {
       setApiError(err?.response?.data?.message || 'Failed to reset password. Please try again.')
     } finally {
@@ -176,7 +173,7 @@ const SendOtpMutation = useMutation({
       <div
         className="
           w-9/10 md:w-3/7
-          max-h-[90vh] md:h-screen
+          h-auto md:h-screen
           absolute rounded-xl md:rounded-none
           left-1/2 -translate-x-1/2
           md:left-auto md:right-0 md:translate-x-0
@@ -220,10 +217,10 @@ const SendOtpMutation = useMutation({
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={isSendOtpPending}
                   className="w-full bg-black text-white font-semibold py-3 rounded-xl hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {loading ? 'Sending OTP...' : 'Send OTP on Email'}
+                  {isSendOtpPending ? 'Sending OTP...' : 'Send OTP on Email'}
                 </button>
               </form>
 
@@ -271,10 +268,10 @@ const SendOtpMutation = useMutation({
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={isVerifyOtpPending}
                   className="w-full bg-black text-white font-semibold py-3 rounded-xl hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {loading ? 'Verifying...' : 'Verify OTP'}
+                  {isVerifyOtpPending ? 'Verifying...' : 'Verify OTP'}
                 </button>
               </form>
 
@@ -337,10 +334,10 @@ const SendOtpMutation = useMutation({
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={isResetPasswordPending}
                   className="w-full bg-black text-white font-semibold py-3 rounded-xl hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {loading ? 'Updating Password...' : 'Reset Password'}
+                  {isResetPasswordPending ? 'Updating Password...' : 'Reset Password'}
                 </button>
               </form>
             </>

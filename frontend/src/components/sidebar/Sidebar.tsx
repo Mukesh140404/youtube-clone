@@ -4,13 +4,11 @@ import { AiFillHome, AiFillLike } from "react-icons/ai";
 import {
   MdOutlineBolt,
   MdHistory,
-  // MdOutlineVideoLibrary,
-  // MdWatchLater,
   MdOutlinePlaylistPlay,
-  // MdOutlineFileDownload,
 } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import SubscribesList from "./SubscribesList";
+import { useUserStore } from "@/store/useUserStore";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -18,6 +16,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen }: SidebarProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const user = useUserStore((state) => state.user);
 
   const mainLinks = [
     {
@@ -35,7 +34,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
   const secondaryLinks = [
     {
       name: "Your channel",
-      to: "/", // Later can be linked to your own profile
+      to: `/${user?.username}`,
       icon: <CgProfile className="w-6 h-6" />,
     },
     {
@@ -48,26 +47,11 @@ export default function Sidebar({ isOpen }: SidebarProps) {
       to: "/",
       icon: <MdOutlinePlaylistPlay className="w-6 h-6" />,
     },
-    // {
-    //   name: "Your videos",
-    //   to: "/",
-    //   icon: <MdOutlineVideoLibrary className="w-6 h-6" />,
-    // },
-    // {
-    //   name: "Watch Later",
-    //   to: "/",
-    //   icon: <MdWatchLater className="w-6 h-6" />,
-    // },
     {
       name: "Liked videos",
-      to: "/",
+      to: "/liked-videos",
       icon: <AiFillLike className="w-6 h-6" />,
     },
-    // {
-    //   name: "Downloads",
-    //   to: "/",
-    //   icon: <MdOutlineFileDownload className="w-6 h-6" />,
-    // },
   ];
 
 

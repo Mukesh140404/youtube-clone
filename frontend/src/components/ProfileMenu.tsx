@@ -1,14 +1,7 @@
 import { LogoutApi } from "@/client/user.api";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
-  // HiOutlineUserCircle,
-  HiOutlineArrowRightOnRectangle, // ✅ logout
-  // HiOutlineArrowsRightLeft,
-  // HiOutlineQuestionMarkCircle,
-  // HiOutlineExclamationTriangle,
-  // HiOutlineCurrencyDollar,
-  // HiOutlineCog6Tooth,
-  // HiOutlinePlay,
+  HiOutlineArrowRightOnRectangle
 } from "react-icons/hi2";
 import { useUserStore } from "@/store/useUserStore";
 
@@ -49,7 +42,7 @@ const ProfileMenu = ({ onClose }: ProfileMenuProps) => {
           <p className="text-xs text-gray-500 dark:text-[#aaaaaa]">{user?.email}</p>
           <Link
             to="/$userId"
-            params={{ userId:user?.username! }}
+            params={{ userId: user?.username! }}
             onClick={onClose}
             className="text-sm text-blue-600 dark:text-[#3ea6ff] mt-1 inline-block font-medium hover:underline"
           >
@@ -59,26 +52,6 @@ const ProfileMenu = ({ onClose }: ProfileMenuProps) => {
       </div>
 
       <div className="py-2 border-b border-gray-100 dark:border-[#3f3f3f]">
-        {/* <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineUserCircle className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Google Account
-          </span>
-        </Link>
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineArrowsRightLeft className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Switch account
-          </span>
-        </Link> */}
         <button
           onClick={handleLogoutClick}
           className="w-full flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors text-left"
@@ -89,62 +62,6 @@ const ProfileMenu = ({ onClose }: ProfileMenuProps) => {
           </span>
         </button>
       </div>
-
-      {/* <div className="py-2 border-b border-gray-100 dark:border-[#3f3f3f]">
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlinePlay className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            YouTube Studio
-          </span>
-        </Link>
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineCurrencyDollar className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Purchases and memberships
-          </span>
-        </Link>
-      </div> */}
-
-      {/* <div className="py-2">
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineCog6Tooth className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Settings
-          </span>
-        </Link>
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineQuestionMarkCircle className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Help
-          </span>
-        </Link>
-        <Link
-          to="/"
-          onClick={onClose}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#3f3f3f] transition-colors"
-        >
-          <HiOutlineExclamationTriangle className="w-5 h-5 mr-4 text-gray-700 dark:text-[#f1f1f1]" />
-          <span className="text-sm text-gray-800 dark:text-[#f1f1f1]">
-            Send feedback
-          </span>
-        </Link>
-      </div> */}
     </div>
   );
 };

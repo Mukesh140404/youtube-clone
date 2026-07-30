@@ -6,3 +6,8 @@
 body {
     @apply transition-colors duration-200;
 }
+
+html,body{
+    scrollbar-width: thin;
+    scrollbar-color: #3637398a transparent;
+}
