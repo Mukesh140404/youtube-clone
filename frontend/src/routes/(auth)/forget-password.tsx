@@ -45,7 +45,7 @@ function ForgotPassword() {
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [loading, setLoading] = useState(false)
+  const [_loading, setLoading] = useState(false)
   const [apiError, setApiError] = useState('')
   const [errors, setErrors] = useState<Record<string, string>>({})
 

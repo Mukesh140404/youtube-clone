@@ -38,8 +38,8 @@ export default function VideoCard({ video }: { video: Video }) {
         <div className="flex gap-3 pr-6">
         <div className="shrink-0 mt-1">
           <img
-            src={video.owner.avatar}
-            alt={video.owner.username}
+            src={video?.owner?.avatar}
+            alt={video?.owner?.username}
             className="w-9 h-9 rounded-full object-cover border border-gray-100 dark:border-[#3f3f3f]"
           />
         </div>
@@ -51,7 +51,7 @@ export default function VideoCard({ video }: { video: Video }) {
           </h3>
 
           <p className="text-xs text-gray-500 dark:text-[#aaaaaa]">
-            {video.owner.username}
+            {video?.owner?.username}
           </p>
 
           <div className="text-xs text-gray-500 dark:text-[#aaaaaa] flex items-center">
