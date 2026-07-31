@@ -51,34 +51,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  // const videos = await Video.aggregate([
-  //   { $sort: { createdAt: 1 } },
-  //   {
-  //     $lookup: {
-  //       from: "users",
-  //       localField: "owner",
-  //       foreignField: "_id",
-  //       as: "owner",
-  //       pipeline: [
-  //         {
-  //           $project: {
-  //             avatar: 1,
-  //             username: 1,
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   },
-  //   {
-  //     $addFields: {
-  //       owner: { $first: "$owner" },
-  //     },
-  //   },
-  //   {
-  //     // Exclude only what you don't want, instead of whitelisting
-  //     $unset: ["isPublished", "__v"],
-  //   },
-  // ]);
 
   if (!videos) throw new ApiError(400, "error in fetching all videos");
   // const count = videos.length;
@@ -175,32 +147,7 @@ const getVideoById = asyncHandler(async (req, res) => {
         localField: "_id",
         foreignField: "video",
         as: "comments",
-        // pipeline:[
-        //     {
-        //         $lookup:{
-        //             from:"users",
-        //             localField:"owner",
-        //             foreignField:"_id",
-        //             as:"commentOwner",
-        //             pipeline:[
-        //                 {
-        //                     $project:{
-        //                         fullName:1,
-        //                         username:1,
-        //                         avatar:1
-        //                     }
-        //                 }
-        //             ]
-        //         }
-        //     },
-        //     {
-        //         $addFields:{
-        //             owner:{
-        //                 $fisrt:"$commentOwner"
-        //             }
-        //         }
-        //     }
-        // ]
+        
       },
     },
     {
@@ -358,27 +305,6 @@ const getUserAllVideos = asyncHandler(async (req, res) => {
       },
     },
     { $sort: { createdAt: -1 } },
-    // {
-    //   $lookup: {
-    //     from: "users",
-    //     localField: "owner",
-    //     foreignField: "_id",
-    //     as: "owner",
-    //     pipeline: [
-    //       {
-    //         $project: {
-    //           avatar: 1,
-    //           username: 1,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
-    // {
-    //   $addFields: {
-    //     owner: { $first: "$owner" },
-    //   },
-    // },
     {
       $project: {
         _id: 1,
@@ -414,9 +340,3 @@ export {
   getUserAllVideos,
 };
 
-//-----------comment controllers-----------
-
-//get all comments for a video
-//add comment to a video
-//update comment
-//delete comment
