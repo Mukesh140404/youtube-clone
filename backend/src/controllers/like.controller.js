@@ -190,7 +190,7 @@ const getAllLikedVideosOfUser = asyncHandler(async (req, res) => {
             }
         }
     ])
-    if (!likedVideos.length) throw new ApiError(500, "error in fetching all liked video by user")
+    if (!likedVideos) throw new ApiError(500, "error in fetching all liked video by user")
     return res
         .status(200)
         .json(
