@@ -10,6 +10,7 @@ import {
 import jwt from "jsonwebtoken";
 import { Otp } from "../models/otp.modals.js";
 import mongoose from "mongoose";
+import { Subscription } from "../models/subscription.models.js";
 
 const genrateTokens = async (userId) => {
   try {
@@ -255,14 +256,14 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 });
 
 const getCurrentuser = asyncHandler(async (req, res) => {
-  // if(!req.user){
-  //   return res
-  //     .status(401)
-  //     .json(new ApiError(401,"UnAutherized Access"))
-  // }
+  const user = req.user.toObject();
+  const subscribers = await Subscription.find({ channel: user._id });
+  if (!subscribers) throw new ApiError(404, "can't found subscribers for the user");
+  const subscriberCount = subscribers.length;
+  if (subscriberCount === 0) throw new ApiError(404, "user has not subscribed to any channel yet");
   return res
     .status(200)
-    .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
+    .json(new ApiResponse(200, { ...user, subscriberCount }, "Current user fetched successfully"));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {

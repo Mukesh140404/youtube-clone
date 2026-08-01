@@ -24,6 +24,7 @@ export type User = {
   fullName: string;
   avatar: string;
   coverImage: string;
+  subscriberCount: number;
 };
 export type Users = { userData: User };
 
@@ -176,7 +177,7 @@ const LoggedUserProfile = ({ userData }: Users) => {
                 @{userData.username}
               </p>
               <p className="text-[#606060] dark:text-[#aaaaaa] text-sm">
-                1.2M subscribers
+                {userData.subscriberCount} subscribers
               </p>
             </div>
           </div>

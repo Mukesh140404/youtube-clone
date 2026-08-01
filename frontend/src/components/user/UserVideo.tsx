@@ -7,6 +7,7 @@ import DeleteModal from "../modal/DeleteModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteVideoApi } from "@/client/video.api";
 import { useUserStore } from "@/store/useUserStore";
+// import { getAllViewsForVideoApi } from "@/client/view.api";
 
 export default function UserVideo({ video }: { video: Video }) {
   const navigate = useNavigate();
@@ -27,6 +28,11 @@ export default function UserVideo({ video }: { video: Video }) {
       console.log("MUTATION ERROR:", err);
     },
   });
+
+  // const { data } = useQuery({
+  //   queryKey: ["userVideos", user?._id],
+  //   queryFn: () => getAllViewsForVideoApi(video._id),
+  // })
 
   const handleDeleteConfirm = (confirm: boolean) => {
     setIsDeleteModalOpen(false);
@@ -50,8 +56,8 @@ export default function UserVideo({ video }: { video: Video }) {
     >
       {/* Thumbnail */}
       <div
-      onClick={handleClick}
-      className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-200 dark:bg-[#272727]">
+        onClick={handleClick}
+        className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-200 dark:bg-[#272727]">
         <img
           src={video.thumbnail}
           alt={video.title}

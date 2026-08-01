@@ -4,9 +4,7 @@ import { toggleSubscribeChannelBtn } from '@/client/subscription.api';
 import VideoSection from './VideoSection';
 import CommunitySection from './CommunitySection';
 import PlaylistSection from './PlaylistSection';
-// import VideoCard from "@/components/VideoCard";
-// import VideoCardSkeleton from "@/components/VideoCardSkeleton";
-// import type {Video} from "@/types/video.type"
+
 
 
 export type ChannelProfile = {

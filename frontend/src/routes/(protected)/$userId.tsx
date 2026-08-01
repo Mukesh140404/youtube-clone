@@ -32,34 +32,9 @@ export const Route = createFileRoute("/(protected)/$userId")({
 });
 
 function ProfilePage() {
-  // const { userId } = Route.useParams();
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [videos, setVideos] = useState<VideoProps[]>([]);
   const data = Route.useLoaderData();
   if(data.type === "me"){
     return <LoggedUserProfile userData = {data.user}/>
   }
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const timer = setTimeout(() => {
-  //     setVideos(
-  //       Array.from({ length: 12 }).map((_, i) => ({
-  //         id: `user-vid-${i}`,
-  //         title: `${userId} Video ${i + 1} - Exclusive Content`,
-  //         thumbnailUrl: `https://picsum.photos/seed/${userId}${i}/640/360`,
-  //         channelId: userId,
-  //         channelName: userId,
-  //         channelAvatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}&backgroundColor=e2e8f0`,
-  //         views: `${Math.floor(Math.random() * 900 + 10)}K`,
-  //         postedAt: `${Math.floor(Math.random() * 11 + 1)} months ago`,
-  //         duration: `${Math.floor(Math.random() * 20 + 5)}:${Math.floor(Math.random() * 50 + 10)}`,
-  //       })),
-  //     );
-  //     setIsLoading(false);
-  //   }, 1200);
-  //   return () => clearTimeout(timer);
-  // }, [userId]);
-  // console.log("data is here",data.user)
   return <UsersProfile userData = {data.user}/>;
 }

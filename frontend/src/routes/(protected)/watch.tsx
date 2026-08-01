@@ -50,6 +50,7 @@ function YouTubeWatchPage() {
         {/* LEFT COLUMN: Player & Comments (8/12 space) */}
         <div className="lg:col-span-8 space-y-6">
           <VideoPlayer
+            videoId={videoInfo._id}
             videoUrl={videoInfo.videoFile}
             thumbnail={videoInfo.thumbnail}
           />
@@ -63,21 +64,6 @@ function YouTubeWatchPage() {
 
         {/* RIGHT COLUMN: Sidebar (4/12 space) */}
         <div className="lg:col-span-4 space-y-4">
-          {/* Category Chips */}
-          {/* <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-            {["All", "From Alien Kings", "Comic books", "Anime", "Manga"].map(
-              (chip) => (
-                <span
-                  key={chip}
-                  className="bg-gray-100 dark:bg-[#272727] px-3 py-1 rounded-lg text-sm whitespace-nowrap cursor-pointer hover:bg-gray-200 dark:hover:bg-[#3f3f3f]"
-                >
-                  {chip}
-                </span>
-              ),
-            )}
-          </div> */}
-
-          {/* Recommendation List */}
           <div className="space-y-4">
             {suggestedVideos.map((video: Video) => (
               <SidebarVideoCard key={video._id} video={video} />
