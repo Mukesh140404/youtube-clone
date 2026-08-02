@@ -39,7 +39,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     },
     {
       name: "History",
-      to: "/",
+      to: "/history",
       icon: <MdHistory className="w-6 h-6" />,
     },
     {

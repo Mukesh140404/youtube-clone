@@ -17,6 +17,7 @@ import { Route as protectedWatchRouteImport } from './routes/(protected)/watch'
 import { Route as protectedTweetsRouteImport } from './routes/(protected)/tweets'
 import { Route as protectedSubscriptionsRouteImport } from './routes/(protected)/subscriptions'
 import { Route as protectedLikedVideosRouteImport } from './routes/(protected)/liked-videos'
+import { Route as protectedHistoryRouteImport } from './routes/(protected)/history'
 import { Route as protectedUserIdRouteImport } from './routes/(protected)/$userId'
 import { Route as authForgetPasswordRouteImport } from './routes/(auth)/forget-password'
 import { Route as authSignupRouteImport } from './routes/(auth)/Signup'
@@ -61,6 +62,11 @@ const protectedLikedVideosRoute = protectedLikedVideosRouteImport.update({
   path: '/liked-videos',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const protectedHistoryRoute = protectedHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
 const protectedUserIdRoute = protectedUserIdRouteImport.update({
   id: '/$userId',
   path: '/$userId',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/Signup': typeof authSignupRoute
   '/forget-password': typeof authForgetPasswordRoute
   '/$userId': typeof protectedUserIdRoute
+  '/history': typeof protectedHistoryRoute
   '/liked-videos': typeof protectedLikedVideosRoute
   '/subscriptions': typeof protectedSubscriptionsRoute
   '/tweets': typeof protectedTweetsRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/Signup': typeof authSignupRoute
   '/forget-password': typeof authForgetPasswordRoute
   '/$userId': typeof protectedUserIdRoute
+  '/history': typeof protectedHistoryRoute
   '/liked-videos': typeof protectedLikedVideosRoute
   '/subscriptions': typeof protectedSubscriptionsRoute
   '/tweets': typeof protectedTweetsRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/(auth)/Signup': typeof authSignupRoute
   '/(auth)/forget-password': typeof authForgetPasswordRoute
   '/(protected)/$userId': typeof protectedUserIdRoute
+  '/(protected)/history': typeof protectedHistoryRoute
   '/(protected)/liked-videos': typeof protectedLikedVideosRoute
   '/(protected)/subscriptions': typeof protectedSubscriptionsRoute
   '/(protected)/tweets': typeof protectedTweetsRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/Signup'
     | '/forget-password'
     | '/$userId'
+    | '/history'
     | '/liked-videos'
     | '/subscriptions'
     | '/tweets'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/Signup'
     | '/forget-password'
     | '/$userId'
+    | '/history'
     | '/liked-videos'
     | '/subscriptions'
     | '/tweets'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/(auth)/Signup'
     | '/(auth)/forget-password'
     | '/(protected)/$userId'
+    | '/(protected)/history'
     | '/(protected)/liked-videos'
     | '/(protected)/subscriptions'
     | '/(protected)/tweets'
@@ -237,6 +249,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedLikedVideosRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(protected)/history': {
+      id: '/(protected)/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof protectedHistoryRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
     '/(protected)/$userId': {
       id: '/(protected)/$userId'
       path: '/$userId'
@@ -293,6 +312,7 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 
 interface protectedRouteRouteChildren {
   protectedUserIdRoute: typeof protectedUserIdRoute
+  protectedHistoryRoute: typeof protectedHistoryRoute
   protectedLikedVideosRoute: typeof protectedLikedVideosRoute
   protectedSubscriptionsRoute: typeof protectedSubscriptionsRoute
   protectedTweetsRoute: typeof protectedTweetsRoute
@@ -304,6 +324,7 @@ interface protectedRouteRouteChildren {
 
 const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedUserIdRoute: protectedUserIdRoute,
+  protectedHistoryRoute: protectedHistoryRoute,
   protectedLikedVideosRoute: protectedLikedVideosRoute,
   protectedSubscriptionsRoute: protectedSubscriptionsRoute,
   protectedTweetsRoute: protectedTweetsRoute,

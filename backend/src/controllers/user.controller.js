@@ -430,39 +430,76 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     },
     {
       $lookup: {
-        from: "videos",
+        from: "views",
         localField: "watchHistory",
         foreignField: "_id",
         as: "watchHistory",
         pipeline: [
           {
+            $sort: {
+              updatedAt: -1
+            }
+          },
+          {
             $lookup: {
-              from: "users",
-              localField: "owner",
+              from: "videos",
+              localField: "video",
               foreignField: "_id",
-              as: "owner",
+              as: "video",
               pipeline: [
                 {
-                  $project: {
-                    fullName: 1,
-                    username: 1,
-                    avatar: 1,
-                  },
+                  $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "owner"
+                  }
                 },
+                {
+                  $addFields: {
+                    owner: { $first: "$owner" },
+                  }
+                },
+                {
+                  $project: {
+                    title: 1,
+                    description: 1,
+                    thumbnail: 1,
+                    duration: 1,
+                    views: 1,
+                    createdAt: 1,
+
+                    "owner._id": 1,
+                    "owner.fullName": 1,
+                    "owner.username": 1,
+                    "owner.avatar": 1,
+                  },
+                }
               ],
             },
           },
           {
             $addFields: {
-              owner: {
-                $fisrt: "$owner",
+              video: {
+                $first: "$video",
               },
+            },
+          },
+          {
+            $project: {
+              createdAt: 1,      // view kab hua
+              updatedAt: 1,
+              video: 1,
             },
           },
         ],
       },
     },
   ]);
+
+  if (!user.length) {
+    throw new ApiError(404, "User not found");
+  }
 
   return res
     .status(200)

@@ -76,7 +76,25 @@ const getAllViewsForVideo = asyncHandler(async (req, res) => {
         )
 })
 
+const getViewById = asyncHandler(async (req, res) => {
+    const { viewId } = req.params
+    if (!viewId) throw new ApiError(400, "view id not valid")
+
+    const view = await View.findById(viewId)
+    if (!view) throw new ApiError(404, "view not found")
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                view,
+                "View is fetched"
+            )
+        )
+})
+
 export {
     addViewOnVideo,
-    getAllViewsForVideo
+    getAllViewsForVideo,
+    getViewById
 }

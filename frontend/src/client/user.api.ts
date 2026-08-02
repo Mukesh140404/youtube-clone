@@ -152,6 +152,15 @@ const ChangeCoverImageApi = async (coverImageForm: CoverImageFormData) => {
   }
 };
 
+const getWatchlistApi = async () => {
+  try {
+    const res = await api.get("/users/watch-history");
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   loginApi,
   SignupApi,
@@ -163,4 +172,5 @@ export {
   GetUserProfileApi,
   ChangeAvatarApi,
   ChangeCoverImageApi,
+  getWatchlistApi,
 };
