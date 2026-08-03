@@ -21,7 +21,7 @@ function YouMobilePage() {
     },
     {
       name: "History",
-      to: "/",
+      to: "/history",
       icon: <MdHistory className="w-6 h-6" />,
     },
     {
@@ -31,7 +31,7 @@ function YouMobilePage() {
     },
     {
       name: "Liked videos",
-      to: "/",
+      to: "/liked-videos",
       icon: <AiFillLike className="w-6 h-6" />,
     },
   ];
