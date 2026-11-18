@@ -11,86 +11,83 @@ const getAllComments = asyncHandler(async (req, res) => {
   if (!videoId) throw new ApiError(400, "not valid video reference");
 
   const comments = await Comment.aggregate([
-  {
-    $match: {
-      video: new mongoose.Types.ObjectId(videoId),
+    {
+      $match: {
+        video: new mongoose.Types.ObjectId(videoId),
+      },
     },
-  },
-  {
-    $facet: {
-      comments: [
-        {
-          $lookup: {
-            from: "users",
-            localField: "owner",
-            foreignField: "_id",
-            as: "owner",
-            pipeline: [
-              {
-                $project: {
-                  username: 1,
-                  avatar: 1,
+    {
+      $facet: {
+        comments: [
+          {
+            $lookup: {
+              from: "users",
+              localField: "owner",
+              foreignField: "_id",
+              as: "owner",
+              pipeline: [
+                {
+                  $project: {
+                    username: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $addFields: {
+              owner: { $first: "$owner" },
+            },
+          },
+          {
+            $lookup: {
+              from: "likes",
+              localField: "_id",
+              foreignField: "comment",
+              as: "likes",
+            },
+          },
+          {
+            $addFields: {
+              likeCount: { $size: "$likes" },
+              isLiked: {
+                $cond: {
+                  if: { $in: [req.user?._id, "$likes.likedBy"] },
+                  then: true,
+                  else: false,
                 },
               },
-            ],
+            },
           },
-        },
-        {
-          $addFields: {
-            owner: { $first: "$owner" },
+          {
+            $project: {
+              likes: 0,
+            },
           },
-        },
-        {
-          $lookup: {
-            from: "likes",
-            localField: "_id",
-            foreignField: "comment",
-            as: "likes"
-          }
-        },
-        {
-          $addFields: {
-            likeCount: { $size: "$likes" },
-            isLiked: {
-              $cond: {
-                if: { $in: [req.user?._id, "$likes.likedBy"] },
-                then: true,
-                else: false
-              }
-            }
-          }
-        },
-        {
-          $project: {
-            likes: 0
-          }
-        }
-      ],
-      totalCount: [
-        {
-          $count: "count",
-        },
-      ],
-    },
-  },
-  {
-    $addFields: {
-      commentCount: {
-        $ifNull: [
-          { $arrayElemAt: ["$totalCount.count", 0] },
-          0,
+        ],
+        totalCount: [
+          {
+            $count: "count",
+          },
         ],
       },
     },
-  },
-  {
-    $project: {
-      comments: 1,
-      commentCount: 1,
+    {
+      $addFields: {
+        commentCount: {
+          $ifNull: [{ $arrayElemAt: ["$totalCount.count", 0] }, 0],
+        },
+      },
     },
-  },
-]);
-// if (!comments) throw new ApiError(400, "comments is not post");
+    {
+      $project: {
+        comments: 1,
+        commentCount: 1,
+      },
+    },
+  ]);
+  // if (!comments) throw new ApiError(400, "comments is not post");
 
   const data = comments[0] || { comments: [], commentCount: 0 };
   return res

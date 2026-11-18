@@ -26,24 +26,25 @@ A full-stack YouTube clone with video uploads, subscriptions, playlists, comment
 
 ## ✨ Features
 
-| Feature | Description |
-|---|---|
-| 🔐 **Auth** | JWT-based sign up, login, and protected routes |
-| 🎥 **Videos** | Upload, edit, delete, and stream videos via Cloudinary |
+| Feature              | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| 🔐 **Auth**          | JWT-based sign up, login, and protected routes           |
+| 🎥 **Videos**        | Upload, edit, delete, and stream videos via Cloudinary   |
 | 📢 **Subscriptions** | Subscribe/unsubscribe to channels; view subscriber lists |
-| 👍 **Likes** | Like or dislike videos, comments, and tweets |
-| 💬 **Comments** | Add, edit, and delete comments on videos |
-| 📋 **Playlists** | Create and manage playlists; add/remove videos |
-| 🐦 **Community** | Post, edit, delete, and like channel tweets/updates |
-| 👤 **Profile** | Manage avatar, cover image, and channel page |
-| 📱 **Responsive** | Mobile-first layout with bottom nav and swipeable tabs |
-| 🌙 **Dark Mode** | Seamless light/dark mode toggle |
+| 👍 **Likes**         | Like or dislike videos, comments, and tweets             |
+| 💬 **Comments**      | Add, edit, and delete comments on videos                 |
+| 📋 **Playlists**     | Create and manage playlists; add/remove videos           |
+| 🐦 **Community**     | Post, edit, delete, and like channel tweets/updates      |
+| 👤 **Profile**       | Manage avatar, cover image, and channel page             |
+| 📱 **Responsive**    | Mobile-first layout with bottom nav and swipeable tabs   |
+| 🌙 **Dark Mode**     | Seamless light/dark mode toggle                          |
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Framework** — React 19 + TypeScript, built with Vite
 - **Styling** — TailwindCSS v4 + Tailwind Merge
 - **Routing** — TanStack Router (file-based)
@@ -52,6 +53,7 @@ A full-stack YouTube clone with video uploads, subscriptions, playlists, comment
 - **Icons** — Lucide React + React Icons
 
 ### Backend
+
 - **Runtime** — Node.js (v18+)
 - **Framework** — Express.js 5
 - **Database** — MongoDB + Mongoose + Aggregate Paginate v2
@@ -183,15 +185,15 @@ npm run dev
 
 All endpoints are under `/api/v1`.
 
-| Resource | Endpoint | Operations |
-|---|---|---|
-| Users | `/users` | Register, login, logout, profile update, watch history |
-| Videos | `/videos` | Upload, edit, delete, fetch all, get by ID |
-| Tweets | `/tweets` | Create, update, delete, get user tweets |
-| Subscriptions | `/subscriptions` | Toggle subscribe, get subscribers/subscribed |
-| Comments | `/comments` | Add, edit, delete, get comments for a video |
-| Likes | `/likes` | Toggle like on video, comment, or tweet |
-| Playlists | `/playlist` | Create, add/remove video, delete, update, get user playlists |
+| Resource      | Endpoint         | Operations                                                   |
+| ------------- | ---------------- | ------------------------------------------------------------ |
+| Users         | `/users`         | Register, login, logout, profile update, watch history       |
+| Videos        | `/videos`        | Upload, edit, delete, fetch all, get by ID                   |
+| Tweets        | `/tweets`        | Create, update, delete, get user tweets                      |
+| Subscriptions | `/subscriptions` | Toggle subscribe, get subscribers/subscribed                 |
+| Comments      | `/comments`      | Add, edit, delete, get comments for a video                  |
+| Likes         | `/likes`         | Toggle like on video, comment, or tweet                      |
+| Playlists     | `/playlist`      | Create, add/remove video, delete, update, get user playlists |
 
 ---
 
@@ -214,5 +216,5 @@ This project is licensed under the [ISC License](https://opensource.org/licenses
 ---
 
 <div align="center">
-Made with ❤️ — <a href="https://github.com/your-username">your-username</a>
+Made with ❤️ — <a href="https://github.com/Mukesh-dev04">Mukesh-dev04</a>
 </div>
