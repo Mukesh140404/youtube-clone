@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { MoreVertical } from "lucide-react";
 import type { Video } from "@/types/video.type";
 import { timeAgo } from "@/utils/timeAgo";
+import {formatTime} from "@/utils/formateDateTime"
 
 export default function VideoCard({ video }: { video: Video }) {
   const navigate = useNavigate();
