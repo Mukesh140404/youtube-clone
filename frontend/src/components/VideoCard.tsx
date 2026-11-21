@@ -28,7 +28,7 @@ export default function VideoCard({ video }: { video: Video }) {
           className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
         />
         <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs font-medium px-1.5 py-0.5 rounded">
-          {video.duration}
+          {formatTime(video.duration)}
         </div>
       </div>
 
